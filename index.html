@@ -218,7 +218,7 @@
   tick();setInterval(tick,1000);
   (function(){var m=document.getElementById('motes');for(var i=0;i<16;i++){var s=document.createElement('span');s.className='mote';s.style.left=(Math.random()*100)+'%';s.style.animationDuration=(9+Math.random()*10)+'s';s.style.animationDelay=(-Math.random()*12)+'s';var sc=.5+Math.random();s.style.transform='scale('+sc+')';m.appendChild(s);} })();
   document.querySelectorAll('.tile').forEach(function(t){t.classList.add('in');});
-  if('serviceWorker' in navigator){var c="self.addEventListener('install',e=>self.skipWaiting());self.addEventListener('activate',e=>self.clients.claim());self.addEventListener('fetch',e=>{});";var b=new Blob([c],{type:'application/javascript'});navigator.serviceWorker.register(URL.createObjectURL(b)).catch(function(){});}
+  if('serviceWorker' in navigator){navigator.serviceWorker.getRegistrations().then(function(rs){rs.forEach(function(r){r.unregister();});}).catch(function(){});if(window.caches&&caches.keys){caches.keys().then(function(ks){ks.forEach(function(k){caches.delete(k);});}).catch(function(){});}}
 </script>
 </body>
 </html>
